@@ -22,15 +22,8 @@ const DATA = [
     name: 'Chien',
     type: 'Carnivore',
     couleur: '#FF0000',
-    photo: 'https://i.pinimg.com/236x/5c/69/3c/5c693c0f289168292b37be4ce35f2de2.jpg'
-  },
-  {
-    id: 'ANI-MASC-0003',
-    name: 'Coq',
-    type: 'Carnivore',
-    couleur: '#008000',
-    photo: 'https://i.pinimg.com/236x/5c/69/3c/5c693c0f289168292b37be4ce35f2de2.jpg'
-  },
+    photo: 'https://www.leparisien.fr/resizer/mtyH_ZTbgSlgjP81wWXhAfWtyD0=/932x582/cloudfront-eu-central-1.images.arcpublishing.com/leparisien/Q6MTNENGOZGU3BR5OUEO2GNMOI.jpg'
+  }
 ];
 
 const Item = ({item}) => (
