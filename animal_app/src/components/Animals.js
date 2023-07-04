@@ -10,12 +10,14 @@ import {
 import { useSelector } from "react-redux"
 import styled, { css } from "styled-components/native"
 import { getAnimals } from '../store/animal/selectors';
+import CardWithOption from './OptionModify';
 
 
-const Item = ({item}) => {
+const Item = ({item, navigation}) => {
 
   return (
-    <Card bgColor={item?.couleur}>
+    <CardWithOption item={item} navigation={navigation}>
+      <Card bgColor={item?.couleur}>
         <Flex>
             <PhotoContainer>
                 <Photo source={{uri: item?.photoUrl}} />
@@ -27,22 +29,21 @@ const Item = ({item}) => {
                 <Type>{item.type}</Type>
             </View>
         </Flex>
-    </Card>
+      </Card>
+    </CardWithOption>
+    
   );
 }
 
-const Animals = () => {
+const Animals = ({navigation}) => {
   const animals = useSelector(getAnimals)
 
-  useEffect(() => {
-    console.log(animals)
-  }, [animals])
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={animals}
-        renderItem={({item}) => <Item item={item} />}
+        renderItem={({item}) => <Item item={item} navigation={navigation} />}
         keyExtractor={item => item.id}
       />
     </SafeAreaView>

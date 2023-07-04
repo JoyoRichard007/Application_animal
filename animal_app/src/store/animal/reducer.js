@@ -21,7 +21,9 @@ const animalReducer = (state=initialState, action) => {
         case actions.CHANGE_ANIMAL:
             return state.map(animal => {
                 if(animal.id === payload.idAnimal) {
-                    return newData
+                    console.log('ancien data', animal)
+                    console.log('new data', payload.newData)
+                    return payload.newData
                 } else {
                     return animal
                 }

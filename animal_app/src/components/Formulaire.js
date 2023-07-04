@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 import styled from "styled-components/native"
 import RNPickerSelect from "react-native-picker-select";
 import { useDispatch } from "react-redux"
-import { createAnimalAction } from '../store/animal/actions';
+import { changeAnimalAction, createAnimalAction } from '../store/animal/actions';
 
-const Formulaire = ({ navigation }) => {
+const Formulaire = ({ navigation, animal }) => {
     const dispatch = useDispatch()
-    const [name, setName] = useState('');
-    const [type, setType] = useState('');
-    const [couleur, setCouleur] = useState('');
-    const [photoUrl, setPhotoUrl] = useState('https://')
+    const [name, setName] = useState(animal?.name ?? '');
+    const [type, setType] = useState(animal?.type ?? '');
+    const [couleur, setCouleur] = useState(animal?.couleur ?? '');
+    const [photoUrl, setPhotoUrl] = useState(animal?.photoUrl ?? 'https://')
 
 
     useEffect(() => {
@@ -28,12 +28,30 @@ const Formulaire = ({ navigation }) => {
   
     const handleSubmit = () => {
       // Effectuez ici les opérations que vous souhaitez effectuer avec les données du formulaire, par exemple envoyer les données à un serveur
+        console.log({
+            name,
+            type,
+            couleur,
+            photoUrl
+        })
+      if(animal) {
+        dispatch(changeAnimalAction(
+            animal.id,
+            {
+                name,
+                type,
+                couleur,
+                photoUrl
+            }
+        ))
+    } else {
       dispatch(createAnimalAction({
         name,
         type,
         couleur,
         photoUrl
       }))
+    }
       navigation.navigate('Acceuil')
     }; 
   
@@ -55,7 +73,6 @@ const Formulaire = ({ navigation }) => {
                 placeholder="couleur"
                 value={couleur}
                 onChangeText={text => setCouleur(text)}
-                multiline
             />
         </View>
         <View>
@@ -90,7 +107,7 @@ const Formulaire = ({ navigation }) => {
                 ]}
             />
         </View>
-        <Button title="Ajouter" disabled={
+        <Button title={`${animal ? "Modifier" : "Ajouter"}`} disabled={
             !(
                 name?.length > 2
                 && type?.length > 2

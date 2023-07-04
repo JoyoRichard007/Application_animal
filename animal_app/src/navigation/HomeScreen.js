@@ -4,7 +4,7 @@ import Animals from '../components/Animals';
 const HomeScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
-        <Animals />
+        <Animals navigation={navigation} />
         <Button
             title="Ajouter"
             onPress={() => navigation.navigate('Formulaire')}
