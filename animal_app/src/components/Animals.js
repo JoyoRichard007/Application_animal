@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   View,
@@ -7,30 +7,18 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import { useSelector } from "react-redux"
 import styled, { css } from "styled-components/native"
+import { getAnimals } from '../store/animal/selectors';
 
-const DATA = [
-  {
-    id: 'ANI-MASC-0001',
-    name: 'Coq',
-    type: 'Carnivore',
-    couleur: '#FF0000',
-    photo: 'https://i.pinimg.com/236x/5c/69/3c/5c693c0f289168292b37be4ce35f2de2.jpg'
-  },
-  {
-    id: 'ANI-MASC-0002',
-    name: 'Chien',
-    type: 'Carnivore',
-    couleur: '#FF0000',
-    photo: 'https://www.leparisien.fr/resizer/mtyH_ZTbgSlgjP81wWXhAfWtyD0=/932x582/cloudfront-eu-central-1.images.arcpublishing.com/leparisien/Q6MTNENGOZGU3BR5OUEO2GNMOI.jpg'
-  }
-];
 
-const Item = ({item}) => (
+const Item = ({item}) => {
+
+  return (
     <Card bgColor={item?.couleur}>
         <Flex>
             <PhotoContainer>
-                <Photo source={{uri: item?.photo}} />
+                <Photo source={{uri: item?.photoUrl}} />
             </PhotoContainer>
             <TitleContainer>
                 <Title>{item.name}</Title>
@@ -40,14 +28,20 @@ const Item = ({item}) => (
             </View>
         </Flex>
     </Card>
-);
+  );
+}
 
 const Animals = () => {
-    
+  const animals = useSelector(getAnimals)
+
+  useEffect(() => {
+    console.log(animals)
+  }, [animals])
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={DATA}
+        data={animals}
         renderItem={({item}) => <Item item={item} />}
         keyExtractor={item => item.id}
       />
