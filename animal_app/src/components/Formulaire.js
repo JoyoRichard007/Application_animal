@@ -2,13 +2,15 @@ import { StyleSheet, TextInput, Picker, Image, Button, Text, View } from 'react-
 import { useEffect, useState } from 'react';
 import styled from "styled-components/native"
 import RNPickerSelect from "react-native-picker-select";
+import { useDispatch } from "react-redux"
+import { createAnimalAction } from '../store/animal/actions';
 
 const Formulaire = ({ navigation }) => {
+    const dispatch = useDispatch()
     const [name, setName] = useState('');
     const [type, setType] = useState('');
     const [couleur, setCouleur] = useState('');
     const [photoUrl, setPhotoUrl] = useState('https://')
-    const [selectedValue, setSelectedValue] = useState('');
 
 
     useEffect(() => {
@@ -26,10 +28,12 @@ const Formulaire = ({ navigation }) => {
   
     const handleSubmit = () => {
       // Effectuez ici les opérations que vous souhaitez effectuer avec les données du formulaire, par exemple envoyer les données à un serveur
-      console.log('Name:', name);
-      console.log('Email:', type);
-      console.log('Message:', couleur);
-      console.log('photoUrl', photoUrl)
+      dispatch(createAnimalAction({
+        name,
+        type,
+        couleur,
+        photoUrl
+      }))
       navigation.navigate('Acceuil')
     }; 
   

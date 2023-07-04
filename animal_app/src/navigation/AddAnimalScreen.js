@@ -11,4 +11,3 @@ const AddAnimalScreen = ({navigation}) => {
 
 export default AddAnimalScreen
 
-const styles = StyleSheet.create({})

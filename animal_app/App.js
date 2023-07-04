@@ -12,10 +12,10 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Acceuil" component={HomeScreen} />
-          <Stack.Screen name="Formulaire" component={AddAnimalScreen} />
-        </Stack.Navigator>
+            <Stack.Navigator>
+              <Stack.Screen name="Acceuil" component={HomeScreen} />
+              <Stack.Screen name="Formulaire" component={AddAnimalScreen} />
+            </Stack.Navigator>
       </NavigationContainer>
     </Provider>
   );
